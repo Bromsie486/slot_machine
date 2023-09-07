@@ -19,11 +19,13 @@ row_content = {
 
 
 def get_slot_machine_spin(rows, cols, symbols):
+    #Filling up the symbol list
     all_symbols = []
     for symbol, symbol_count in symbols.items():
         for _ in range(symbol_count):
             all_symbols.append(symbol)
 
+    #Generate columns
     columns = []
     for _ in range(cols):
         column = []
