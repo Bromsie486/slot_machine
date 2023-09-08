@@ -13,6 +13,27 @@ row_content = {
 }
 
 
+def check_results(result):
+    correct_lines = 0
+
+    for item in range(len(result[0])):
+        temp_list = []
+        for row in result:
+            temp_list.append(row[item])
+        
+        first_item = temp_list[0]
+        decider = True
+
+        for entry in temp_list:
+            if entry != first_item:
+                decider = False
+        
+        if decider:
+            print("Correct line found!")
+            correct_lines += 1
+
+
+
 def get_slot_machine_spin(rows, cols, symbols):
     #Filling up the symbol list
     all_symbols = []
@@ -74,10 +95,11 @@ def get_bet():
     
 def main():
     deposit()
-    bet = get_bet()
-    print(f"You are betting ${bet}. Remaining balance: {balance}")
-    result = get_slot_machine_spin(ROWS, COLS, row_content)
-    print_slot_machine(result)
-
+    while True:
+        bet = get_bet()
+        print(f"You are betting ${bet}. Remaining balance: {balance}")
+        result = get_slot_machine_spin(ROWS, COLS, row_content)
+        print_slot_machine(result)
+        check_results(result)
 
 main()
