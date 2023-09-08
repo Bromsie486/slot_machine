@@ -6,18 +6,20 @@ COLS = 3
 
 balance = 0
 row_content = {
-    "A": 2,
-    "B": 3,
-    "C": 6,
-    "D": 8
+    "A": 3,
+    "B": 4,
+    "C": 7,
+    "D": 10
 }
 
 
 def check_results(bet, result):
     global balance
     correct_lines = 0
+    multiplier = 1
 
-    #Checking if there are correct lines
+
+    #Checking the correct lines
     for item in range(len(result[0])):
         temp_list = []
         for row in result:
@@ -32,9 +34,17 @@ def check_results(bet, result):
         
         if decider:
             correct_lines += 1
+            if temp_list[0] == "A":
+                multiplier *= 5
+            elif temp_list[0] == "B":
+                multiplier *= 3
+            elif temp_list[0] == "C":
+                multiplier *= 2
+            else:
+                multiplier *= 1.5
 
     if correct_lines > 0:
-        prize = bet * (correct_lines + 1)
+        prize = bet * multiplier
         balance += prize
         print(f"You have won on {correct_lines} lines! You gained ${prize}. Your new balance is {balance}.")
     else:
@@ -92,21 +102,22 @@ def get_bet():
             amount = int(amount)
             if amount <= balance:
                 balance -= amount
+                print(f"You are betting ${amount}. Your balance is {balance}")
                 return amount
             else:
                 print(f"Your current balance is {balance}, your bet cannot exceed that.")
         else:
             print("Please enter a number.")
     
-
     
 def main():
+    print("Welcome to Skonda Casino!")
     deposit()
     while True:
         bet = get_bet()
-        print(f"You are betting ${bet}. Your balance is {balance}")
         result = get_slot_machine_spin(ROWS, COLS, row_content)
         print_slot_machine(result)
         check_results(bet, result)
+        
 
 main()
