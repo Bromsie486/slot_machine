@@ -1,11 +1,6 @@
 import random
 
 
-MIN_LINES = 1
-MAX_LINES = 3
-MIN_BET = 1
-MAX_BET = 100
-
 ROWS = 3
 COLS = 3
 
@@ -64,14 +59,14 @@ def deposit():
 def get_bet():
     global balance
     while True:
-        amount = input("How much would you like to bet on each line? $")
+        amount = input("How much would you like to bet $")
         if amount.isdigit():
             amount = int(amount)
-            if MAX_BET >= amount >= MIN_BET and amount <= balance:
+            if amount <= balance:
                 balance -= amount
                 return amount
             else:
-                print(f"Amount must be between {MIN_BET} and {MAX_BET}.")
+                print(f"Your current balance is {balance}, your bet cannot exceed that.")
         else:
             print("Please enter a number.")
     
