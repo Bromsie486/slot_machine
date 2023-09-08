@@ -118,8 +118,11 @@ def main():
         result = get_slot_machine_spin(ROWS, COLS, row_content)
         print_slot_machine(result)
         check_results(bet, result)
+        if input("Would you like to quit? (y/n) ").lower() == "y":
+            print("A wise choice. See you soon!")
+            quit()
     
-    if input("Your balance has reached 0. Would you like to deposit more? (y/n)").lower() == "y":
+    if input("Your balance has reached 0. Would you like to deposit more? (y/n) ").lower() == "y":
         print("That's what I call bravery!")
         main()
     else:
