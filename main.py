@@ -113,11 +113,16 @@ def get_bet():
 def main():
     print("Welcome to Skonda Casino!")
     deposit()
-    while True:
+    while balance > 0:
         bet = get_bet()
         result = get_slot_machine_spin(ROWS, COLS, row_content)
         print_slot_machine(result)
         check_results(bet, result)
-        
+    
+    if input("Your balance has reached 0. Would you like to deposit more? (y/n)").lower() == "y":
+        print("That's what I call bravery!")
+        main()
+    else:
+        print("See you after your next pay day! Thanks for your money :)")
 
 main()
