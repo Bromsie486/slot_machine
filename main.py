@@ -45,7 +45,6 @@ def print_slot_machine(columns):
             print(column[row], end=" | ") if i != len(columns) - 1 else print(column[row])     
                      
 
-
 def deposit():
     global balance
     while True:
@@ -60,18 +59,6 @@ def deposit():
         else:
             print("Please enter a positive number.")
 
-
-def get_number_of_lines():
-    while True:
-        lines = input("Please enter the number of lines to bet on ({}-{}): ".format(MIN_LINES, MAX_LINES))
-        if lines.isdigit():
-            lines = int(lines)
-            if MIN_LINES <= lines <= MAX_LINES:
-                return lines
-            else:
-                print("Please enter a valid number of lines.")
-        else:
-            print("Please enter a number.")
 
 
 def get_bet():
@@ -92,10 +79,8 @@ def get_bet():
     
 def main():
     deposit()
-    lines = get_number_of_lines()
     bet = get_bet()
-    total_bet = bet * lines
-    print(f"You are betting ${bet} on {lines} lines. Total bet is equal to: ${total_bet}. Remaining balance: {balance}")
+    print(f"You are betting ${bet}. Remaining balance: {balance}")
     result = get_slot_machine_spin(ROWS, COLS, row_content)
     print_slot_machine(result)
 
