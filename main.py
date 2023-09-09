@@ -97,30 +97,31 @@ def deposit():
 def get_bet():
     global balance
     while True:
-        amount = input("How much would you like to bet $")
-        if amount.isdigit():
-            amount = int(amount)
-            if amount <= balance:
-                balance -= amount
-                print(f"You are betting ${amount}. Your balance is {balance}")
-                return amount
+        amount = input("How much would you like to bet? $")
+        if amount.lower() != "q":
+            if amount.isdigit():
+                amount = int(amount)
+                if amount <= balance:
+                    balance -= amount
+                    print(f"You are betting ${amount}. Your balance is {balance}")
+                    return amount
+                else:
+                    print(f"Your current balance is {balance}, your bet cannot exceed that.")
             else:
-                print(f"Your current balance is {balance}, your bet cannot exceed that.")
+                print("Please enter a number.")
         else:
-            print("Please enter a number.")
+            print("You have quit the game.")
+            quit()
     
     
 def main():
-    print("Welcome to Skonda Casino!")
+    print("Welcome to Skonda Slot!\nIf you ever want to quit, just use the 'q' command during betting.")
     deposit()
     while balance > 0:
         bet = get_bet()
         result = get_slot_machine_spin(ROWS, COLS, row_content)
         print_slot_machine(result)
         check_results(bet, result)
-        if input("Would you like to quit? (y/n) ").lower() == "y":
-            print("A wise choice. See you soon!")
-            quit()
     
     if input("Your balance has reached 0. Would you like to deposit more? (y/n) ").lower() == "y":
         print("That's what I call bravery!")
