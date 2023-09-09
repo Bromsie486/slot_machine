@@ -128,4 +128,6 @@ def main():
     else:
         print("See you after your next pay day! Thanks for your money :)")
 
-main()
+
+if __name__ == "__main__":
+    main()
